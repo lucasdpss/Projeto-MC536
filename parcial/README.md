@@ -10,7 +10,7 @@ O projeto visa agregar dados da Secretaria de Segurança Pública de São Paulo 
 
 ## Slides da Apresentação
 * [Link para Google Slides](https://docs.google.com/presentation/d/1porA_wQu243cNPb5Ki6CGY7-mp7DM8OEuhOIXYokOCg/edit?usp=sharing)
-* [Link para PDF]()
+* [Link para PDF](https://github.com/lucasdpss/Projeto-MC536/blob/main/parcial/slides/slides.pdf)
 
 Estrutura de pastas:
 ~~~
