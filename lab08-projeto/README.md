@@ -16,6 +16,8 @@ Estrutura de pastas:
 ## Modelo Lógico Combinado do Banco de Dados de Grafos
 ![Modelo Lógico de Grafos](images/modelo-logico-grafos.png)
 
+Para as nossas perguntas/análises, decidimos modificar os modelos propostos por cada um de nós para o laboratório 07 de forma a melhor adaptar o modelo aos tipos de análises apresentados para este trabalho. Dessa forma a informação relacionada ao local de postes, postos policiais e crimes agora foi encapsulada pelo nó `quadrante`, que representa um quadrado abrangendo um certo intervalo de coordenadas, em vez de um nó `local`, que representava apenas um par de coordenadas. Assim, podemos fazer análises mais significativas em relação a locais e distâncias.
+
 ## Perguntas de Pesquisa/Análise Combinadas e Respectivas Análises
 
 ### Pergunta/Análise 1
