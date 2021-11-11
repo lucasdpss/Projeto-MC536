@@ -1,4 +1,5 @@
 # Projeto "Mapeamento da Criminalidade em SP"
+Binder do repositório: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lucasdpss/Projeto-MC536/HEAD)
 
 # Equipe `Os Delegados` - `SSPD`
 * Antonio Gabriel da Silva Fernandes - 231551
