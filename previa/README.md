@@ -37,7 +37,7 @@ A estrutura aqui apresentada é uma simplificação daquela proposta pelo [Cooki
 ## Modelo Conceitual Preliminar
 
 > Coloque aqui a imagem do modelo conceitual preliminar em ER ou UML, como o exemplo a seguir:
-> ![Modelo Conceitual](images/modelo_conceitual.png)
+> ![Modelo Conceitual](assets/modelo_conceitual.png)
 
 ## Modelos Lógicos Preliminares
 
