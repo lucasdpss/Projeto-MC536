@@ -35,7 +35,7 @@
 ## Modelo Conceitual Preliminar
 
 > Coloque aqui a imagem do modelo conceitual preliminar em ER ou UML, como o exemplo a seguir:
-> ![Modelo Conceitual](assets/modelo_conceitual.png)
+> ![Modelo Conceitual](assets/modelo_conceitual.PNG)
 
 ## Modelos Lógicos Preliminares
 
