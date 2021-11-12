@@ -1,0 +1,66 @@
+A.I.-Furto qualificado (art. 155, §4o.) - RESIDENCIA
+Posse não justificada de instr. de empr. no furto (art. 25)
+A.I.-Furto (art. 155) - VEICULO
+Furto (art. 155) - TRANSEUNTE
+Furto (art. 155) - OUTROS
+Furto qualificado (art. 155, §4o.) - ESTABELECIMENTO COMERCIAL
+Furto qualificado (art. 155, §4o.) - INTERIOR DE VEICULO
+Furto qualificado (art. 155, §4o.) - TRANSEUNTE
+Furto (art. 155) - INTERIOR DE VEICULO
+Furto (art. 155) - INTERIOR ESTABELECIMENTO
+Furto (art. 155) - INTERIOR TRANSPORTE COLETIVO
+Furto qualificado (art. 155, §4o.) - RESIDENCIA
+Furto (art. 155) - ESTABELECIMENTO COMERCIAL
+Furto (art. 155) - VEICULO
+Furto qualificado (art. 155, §4o.) - INTERIOR TRANSPORTE COLETIVO
+Furto (art. 155) - RESIDENCIA
+Furto qualificado (art. 155, §4o.) - INTERIOR ESTABELECIMENTO
+Furto qualificado (art. 155, §4o.) - OUTROS
+Furto qualificado (art. 155, §4o.) - ESTABELECIMENTO-OUTROS
+A.I.-Furto qualificado (art. 155, §4o.) - TRANSEUNTE
+Furto (art. 155) - ESTABELECIMENTO-OUTROS
+Furto (art. 155) - COLETIVO
+Furto qualificado (art. 155, §4o.) - COLETIVO
+Furto de coisa comum (art. 156) - ESTABELECIMENTO COMERCIAL
+Furto qualificado (art. 155, §4o.) - ESTABELECIMENTO ENSINO
+Furto qualificado (art. 155, §4o.) - VEICULO
+Furto (art. 155) - ESTABELECIMENTO ENSINO
+A.I.-Furto qualificado (art. 155, §4o.) - INTERIOR DE VEICULO
+A.I.-Furto qualificado (art. 155, §4o.) - ESTABELECIMENTO COMERCIAL
+A.I.-Furto qualificado (art. 155, §4o.) - OUTROS
+Furto (art. 155) - Saidinha de Banco
+A.I.-Furto (art. 155) - TRANSEUNTE
+Furto (art. 155) - ESTABELECIMENTO BANCARIO
+A.I.-Furto (art. 155) - INTERIOR DE VEICULO
+Furto (art. 155) - CONDOMINIO COMERCIAL
+A.I.-Furto (art. 155) - OUTROS
+Furto (art. 155) - CARGA
+A.I.-Furto qualificado (art. 155, §4o.) - VEICULO
+Furto qualificado (art. 155, §4o.) - CARGA
+A.I.-Furto (art. 155) - INTERIOR TRANSPORTE COLETIVO
+A.I.-Furto (art. 155) - INTERIOR ESTABELECIMENTO
+A.I.-Furto (art. 155) - ESTABELECIMENTO ENSINO
+Furto (art. 155) - CONDOMINIO RESIDENCIAL
+A.I.-Furto (art. 155) - ESTABELECIMENTO-OUTROS
+Furto (art. 155) - Caixa Eletrônico
+A.I.-Furto (art. 155) - COLETIVO
+Furto qualificado (art. 155, §4o.) - CONDOMINIO RESIDENCIAL
+Furto qualificado (art. 155, §4o.) - CONDOMINIO COMERCIAL
+Furto qualificado (art. 155, §4o.) - ESTABELECIMENTO BANCARIO
+Furto qualificado (art. 155, §4o.) - Saidinha de Banco
+A.I.-Furto qualificado (art. 155, §4o.) - INTERIOR TRANSPORTE COLETIVO
+A.I.-Furto (art. 155) - RESIDENCIA
+A.I.-Furto (art. 155) - ESTABELECIMENTO COMERCIAL
+Furto de coisa comum (art. 156) - TRANSEUNTE
+A.I.-Furto qualificado (art. 155, §4o.) - CARGA
+A.I.-Furto qualificado (art. 155, §4o.) - INTERIOR ESTABELECIMENTO
+A.I.-Furto qualificado (art. 155, §4o.) - COLETIVO
+Furto de coisa comum (art. 156) - INTERIOR TRANSPORTE COLETIVO
+Furto de coisa comum (art. 156) - ESTABELECIMENTO-OUTROS
+Furto qualificado (art. 155, §4o.) - APLICATIVO DE MOBILIDADE URBANA
+Furto (art. 155) - APLICATIVO DE MOBILIDADE URBANA
+A.I.-Furto (art. 155) - CARGA
+Furto de coisa comum (art. 156) - INTERIOR DE VEICULO
+A.I.-Furto qualificado (art. 155, §4o.) - FIOS E CABOS
+Apropriação indébita (art. 168)
+Apropriação de coisa achada (art. 169, par. único, II)

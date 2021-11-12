@@ -1,0 +1,33 @@
+A.I.-Roubo (art. 157)
+A.I.-Roubo (art. 157) - VEICULO
+Roubo (art. 157) - CARGA
+A.I.-Roubo (art. 157) - ESTABELECIMENTO COMERCIAL
+Roubo (art. 157) - OUTROS
+A.I.-Roubo (art. 157) - TRANSEUNTE
+Roubo (art. 157) - INTERIOR ESTABELECIMENTO
+A.I.-Roubo (art. 157) - RESIDENCIA
+A.I.-Roubo (art. 157) - OUTROS
+A.I.-Roubo (art. 157) - INTERIOR TRANSPORTE COLETIVO
+Roubo (art. 157) - ESTABELECIMENTO COMERCIAL
+A.I.-Roubo (art. 157) - INTERIOR ESTABELECIMENTO
+Roubo (art. 157) - TRANSEUNTE
+Roubo (art. 157) - VEICULO
+Roubo (art. 157) - INTERIOR DE VEICULO
+Roubo (art. 157) - RESIDENCIA
+Roubo (art. 157) - INTERIOR TRANSPORTE COLETIVO
+Roubo (art. 157) - COLETIVO
+Roubo (art. 157) - Saidinha de Banco
+A.I.-Roubo (art. 157) - CARGA
+Roubo (art. 157) - ESTABELECIMENTO-OUTROS
+Roubo (art. 157) - ESTABELECIMENTO BANCARIO
+Roubo (art. 157) - CONDOMINIO RESIDENCIAL
+A.I.-Roubo (art. 157) - INTERIOR DE VEICULO
+Roubo (art. 157) - ESTABELECIMENTO ENSINO
+Roubo (art. 157) - Caixa Eletrônico
+A.I.-Roubo (art. 157) - ESTABELECIMENTO-OUTROS
+A.I.-Roubo (art. 157) - COLETIVO
+Roubo (art. 157) - CONDOMINIO COMERCIAL
+A.I.-Roubo (art. 157) - CONDOMINIO COMERCIAL
+Roubo (art. 157) - APLICATIVO DE MOBILIDADE URBANA
+A.I.-Roubo (art. 157) - APLICATIVO DE MOBILIDADE URBANA
+Roubo (art. 157) - VEÍCULO COMPARTILHADO

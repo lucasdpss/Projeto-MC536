@@ -1,0 +1,21 @@
+Localização/Apreensão e Entrega de veículo
+Comunicação de óbito
+Localização/Apreensão de veículo
+Localização/Apreensão de objeto
+Localização/Apreensão e Entrega de objeto
+Encontro de Pessoa
+Captura de procurado
+Apreensão de Adolescente
+Entrega de veículo localizado/apreendido
+Outros não criminal
+Entrega de objeto localizado/apreendido
+Perda/Extravio
+Desaparecimento de pessoa
+Queda acidental
+Morte natural
+Legítima defesa (art. 23, II)
+Irregularidades Funcionais
+Estrito cumprimento de dever legal (art. 23, III)
+Suicídio consumado
+Suicídio tentado
+Auto lesão
