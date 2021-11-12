@@ -7,8 +7,6 @@
 
 # Estrutura de Arquivos e Pastas
 
-A estrutura aqui apresentada é uma simplificação daquela proposta pelo [Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/). A estrutura geral é a seguinte:
-
 ~~~
 ├── README.md  <- arquivo apresentando a proposta
 │
