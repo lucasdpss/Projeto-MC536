@@ -76,6 +76,14 @@ Google Maps Geocoding API | [Link](https://developers.google.com/maps/documentat
 
 ## Detalhamento do Projeto
 ### Dados de crimes
+Os dados foram baixados de forma automatizada usando [Selenium](https://selenium-python.readthedocs.io/) com um [script](src/auto_download_crimes.py) Python. O uso dessa ferramenta foi necessário porque o site disponibiliza os dados através de uma aplicação Javascript, de tal forma que é difícil interagir com a aplicação usando requisições HTTP apenas.
+
+Com os dados baixados, foi possível juntá-los todos em um único arquivo CSV. Várias colunas com dados que não seriam úteis para nós foram descartadas. Foram descartadas também as linhas com dados incompletos, as linhas correspondentes a BOs complementares e as correspondentes a BOs fora da cidade de São Paulo. Além disso, foi criada uma coluna de ID.
+
+Os dados originais têm, associado a cada BO, o crime ou a ocorrência registrada. Devido à grande variedade de valores nesse campo, decidimos que seria melhor criar algumas grandes categorias de crime, de forma a facilitar análises. Os crimes dentro de cada categoria podem ser vistos nos arquivos da pasta `data/interim/tipos crimes`. Essa classificação foi feita parcialmente de forma manual, mas majoritariamente usando scripts que buscavam certas palavras-chave nos registros. Depois, foi criada uma coluna na tabela para armazenar o tipo do crime usando um [script](src/separar_tipos.py). Os diferentes tipos foram listados também em uma [tabela separada](data/processed/tipos_crimes.csv).
+
+Depois que os limites dos quadrantes haviam sido determinados, um script simples foi usado para determinar em que quadrante cada crime estava localizado, chegando assim à [tabela final](data/processed/crimes.csv).
+
 ### Dados de iluminação pública
 A partir dos dados originais, foram necessárias poucas transformações. A coluna "LOCAL" presente na tabela original foi descartada, assim com algumas linhas com dados sem sentido (latitudes e longitudes grandes demais, por exemplo). A coluna "ID" na tabela original foi substituída por números sequenciais.
 
@@ -89,7 +97,7 @@ Com isso, foi criado um [script](src/geocoder_postos.py) para acessar a API de G
 Por fim, depois que os limites dos quadrantes haviam sido determinados, foi utilizado um [script](src/quadrantes_postos_novo.py) para determinar em qual quadrante cada um dos postos estava localizado, e esse dado foi também armazenado na [tabela final](data/processed/postos.csv).
 
 ### Quadrantes
-A determinação dos quadrantes foi feita com um [script](src/ajustar_quads.py).Primeiramente, foram determinadas a latitude e longitude mínima e máxima presentes nas tabelas de crimes e de postos policiais. Os postes de iluminação não foram levados em consideração nesse momento, pois os postes que não estivessem próximos a um posto policial ou a um crime não seriam relevantes para essa análise, e seriam descartados posteriormente.
+A determinação dos quadrantes foi feita com um [script](src/ajustar_quads.py). Primeiramente, foram determinadas a latitude e longitude mínima e máxima presentes nas tabelas de crimes e de postos policiais. Os postes de iluminação não foram levados em consideração nesse momento, pois os postes que não estivessem próximos a um posto policial ou a um crime não seriam relevantes para essa análise, e seriam descartados posteriormente.
 
 ~~~python
 latmin = min(postos_df.LAT.min(), crimes_df.LAT.min())
