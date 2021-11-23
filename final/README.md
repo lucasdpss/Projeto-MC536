@@ -123,7 +123,7 @@ Encontramos diversos problemas com esse modelo. Primeiramente, ter locais armaze
 
 Na tentativa de resolver esses problemas, migramos para o modelo final, já apresentado anteriormente:
 
-![Modelo conceitual final](assets/modelo_conceitual_final.png)
+![Modelo conceitual final](assets/modelo_conceitual_final.PNG)
 
 Nesse modelo, as localizações dos elementos são guardadas em forma de coordenadas, de forma que é mais simples calcular a distância (euclidiana) entre dois pontos. Além disso, foi introduzido o conceito dos quadrantes, com limites bem estabelecidos de latitude e longitude, de forma que cada poste, posto policial ou crime está localizado em um quadrante. Esse conceito facilita bastante análises em um contexto mais macro, quando não são necessárias as coordenadas exatas dos elementos. Também foi criada uma entidade "Tipo Crime". 
 
