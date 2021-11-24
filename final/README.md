@@ -317,4 +317,4 @@ Em toda São Paulo, o tipo de crime mais comum é roubo.
 #### Outras Perguntas/Análises
 Assim como a distribuição de postos, é possível realizar as mesmas questões para os postes. Além disso, é possível agrupar o número de postes e postos policiais para verificar como o maior número de equipamentos de segurança em um mesmo quadrante/região afeta os crimes ocorridos neles.
 
-Link para notebook com as consultas em SQL: [notebook](notebooks/queries_modelo_relacional.ipynb
+Link para notebook com as consultas em SQL: [notebook](notebooks/queries_modelo_relacional.ipynb)
