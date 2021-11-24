@@ -57,7 +57,6 @@ Postos(_ID_, CLASSE, TIPO, LAT, LON, QUAD)
 ![Modelo lógico de grafo de propriedades](assets/modelo_logico_grafos.png)
 
 ## Dataset Publicado
-### Arquivos finais (em `data/processed/`)
 título do arquivo/base | link | breve descrição
 ----- | ----- | -----
 `crimes.csv` | [Link](data/processed/crimes.csv) | Tabela com os dados de crimes (tabela `Crimes` do modelo relacional).
@@ -123,6 +122,7 @@ lons = [lonmin + i*TAM_QUAD for i in range(n_quads_lon + 1)]
 Com isso, foi criada a [tabela](data/processed/quads.csv) com os limites de cada quadrante e seus respectivos nomes. São, ao total, 528 quadrantes, sendo 24 no sentido da latitude e 22 no sentido da longitude.
 
 ### Modelo de grafos
+O modelo de grafos foi construído no Neo4j usando [comandos cypher](src/contrucao_dataset.cypher) para importar os dados das tabelas previamente construídas de acordo com o modelo que já foi apresentado previamente. Foi necessário instalar o Neo4j localmente, pois a implementação em nuvem não tinha capacidade para lidar com a grande quantidade de dados do nosso projeto.
 
 ## Evolução do Projeto
 ### Modelo Conceitual
@@ -146,7 +146,67 @@ Inicialmente, a divisão em quadrantes foi feita utilizando quadrantes de 10 km 
 
 ## Perguntas de Pesquisa/Análise Combinadas e Respectivas Análises
 
-### Perguntas/Análise com Resposta Implementada
+### Perguntas/Análise com Resposta Implementada - Modelo de Grafos
+
+#### Pergunta/Análise 1
+* Quais são os quadrantes com maior quantidade de crimes?
+  * É possível, para cada quadrante, contar quantos nós de crime têm arestas ligando a ele. Esse valor é associado a uma propriedade no nó do quadrante, e depois são retornados os 50 nós com maior quantidade de crimes. Essa análise é interessante nesse modelo pois é possível observar grandes regiões conexas formadas por vários quadrantes com alta criminalidade, implicando a existência de macrorregiões particularmente perigosas compostas por vários quadrantes.
+
+~~~cypher
+MATCH (q:Quad)
+WITH q
+ORDER BY q.qtdCrimes DESC
+LIMIT 50
+RETURN q
+~~~
+![Quadrantes com maior quantidade de crimes](assets/query_1.png)
+
+#### Pergunta/Análise 2
+* Quais são os quadrantes com maior quantidade de crimes noturnos?
+  * Semelhante à pergunta anterior, para cada quadrante, vamos contar quantos nós de crime têm arestas ligando a ele, mas dessa vez considerando apenas crimes noturnos. Esse valor é associado a uma propriedade no nó do quadrante, e depois são retornados os 50 nós com maior quantidade de crimes. Assim como na pergunta anterior, essa análise é interessante nesse modelo pois é possível observar grandes regiões conexas formadas por vários quadrantes com alta criminalidade, implicando a existência de macrorregiões particularmente perigosas compostas por vários quadrantes.
+
+~~~cypher
+MATCH (q:Quad)
+SET q.qtdCrimesNoite = 0
+
+MATCH (c:Crime {periodoOcorrencia: "A NOITE"})-[:Localizado]->(q:Quad)
+SET q.qtdCrimesNoite = q.qtdCrimesNoite + 1
+
+MATCH (q:Quad)
+WITH q
+ORDER BY q.qtdCrimesNoite DESC
+LIMIT 50
+RETURN q
+~~~
+![Quadrantes com maior quantidade de crimes noturnos](assets/query_2.png)
+
+#### Pergunta/Análise 3
+* Como estão distribuídos os crimes, os postos policiais e os postes de iluminação pelos quadrantes?
+  * Podemos simplesmente contar quantos crimes, postos policiais ou postes de iluminação estão ligados a cada quadrante e criar uma visualização no Cytoscape para ver os resultados. Essa análise é útil para tornar mais palpável a distribuição dos dados.
+
+![Visualizações Cytoscape](assets/visualizacao_cytoscape.png)
+
+Como podemos ver, os crimes e os postes policiais seguem uma distribuição que se aproxima do formato da cidade de São Paulo. No entanto, os postes de iluminação estão claramente deslocados e fora da cidade. Com isso, depois de investigações mais profundas usando os dados originais, constatamos que os dados de iluminação fornecidos pela prefeitura são de má qualidade. Dessa forma, as nossas análises que envolvem os dados de iluminação podem render resultados incoerentes, mas ainda assim a ideia por trás delas é teoricamente correta.
+
+#### Pergunta/Análise 4
+* Quais são os quadrantes com maior razão entre crimes e quantidade de postos policiais?
+  * Foi feita uma visualização usando o Cytoscape para observar essa métrica. Um valor alto para essa razão pode indicar a necessidade da construção de mais postos policiais naquela área.
+
+![Visualização da razão entre crimes e quantidade de postos policiais](assets/ratio_crime_postos.png)
+![Valores da razão crimes/postos](assets/tabela_ratio.png)
+
+É possível notar uma região central com altos valores para essa métrica, principalmente nos quadrantes (14, 6) e (14, 7). Isso pode significar que alguma intervenção é necessária nessa área.
+
+#### Pergunta/Análise 5
+* Quais são os pontos com maior closeness centrality em relação a homicídios?
+  * A closeness centrality é uma boa métrica para analisar quadrantes mais perigosos por levar em consideração também os homicídios ocorridos nos quadrantes vizinhos. Assim, é possível, a partir dessa métrica, estipular a região com maior probabilidade de homicídio.
+
+![Visualização da closeness centrality](assets/closeness_homicidio.png)
+![Valores da closeness centrality](assets/tabela_closeness.png)
+
+É possível observar que os maiores valores dessa métrica também estão próximos do quadrante (14, 7), indicando um hotspot de crimes nessa área.
+
+### Perguntas/Análise com Resposta Implementada - Modelo Relacional
 
 #### Pergunta/Análise 1
 * Qual a relação entre o número de postes policiais e número de crimes nos quadrantes?
