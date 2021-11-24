@@ -192,8 +192,7 @@ Como podemos ver, os crimes e os postes policiais seguem uma distribuição que 
 * Quais são os quadrantes com maior razão entre crimes e quantidade de postos policiais?
   * Foi feita uma visualização usando o Cytoscape para observar essa métrica. Um valor alto para essa razão pode indicar a necessidade da construção de mais postos policiais naquela área.
 
-![Visualização da razão entre crimes e quantidade de postos policiais](assets/ratio_crime_postos.png)
-![Valores da razão crimes/postos](assets/tabela_ratio.png)
+![Visualização da razão entre crimes e quantidade de postos policiais](assets/ratio.png)
 
 É possível notar uma região central com altos valores para essa métrica, principalmente nos quadrantes (14, 6) e (14, 7). Isso pode significar que alguma intervenção é necessária nessa área.
 
@@ -201,8 +200,7 @@ Como podemos ver, os crimes e os postes policiais seguem uma distribuição que 
 * Quais são os pontos com maior closeness centrality em relação a homicídios?
   * A closeness centrality é uma boa métrica para analisar quadrantes mais perigosos por levar em consideração também os homicídios ocorridos nos quadrantes vizinhos. Assim, é possível, a partir dessa métrica, estipular a região com maior probabilidade de homicídio.
 
-![Visualização da closeness centrality](assets/closeness_homicidio.png)
-![Valores da closeness centrality](assets/tabela_closeness.png)
+![Visualização da closeness centrality](assets/closeness.png)
 
 É possível observar que os maiores valores dessa métrica também estão próximos do quadrante (14, 7), indicando um hotspot de crimes nessa área.
 
