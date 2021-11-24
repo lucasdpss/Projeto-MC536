@@ -76,7 +76,7 @@ Google Maps Geocoding API | [Link](https://developers.google.com/maps/documentat
 
 ## Detalhamento do Projeto
 ### Dados de crimes
-Os dados foram baixados de forma automatizada usando [Selenium](https://selenium-python.readthedocs.io/) com um [script](src/auto_download_crimes.py) Python. O uso dessa ferramenta foi necessário porque o site disponibiliza os dados através de uma aplicação Javascript, de tal forma que é difícil interagir com a aplicação usando requisições HTTP apenas.
+Os dados foram baixados de forma automatizada usando [Selenium](https://selenium-python.readthedocs.io/) com um [script](src/auto_download_crimes.py) Python. O uso dessa ferramenta foi necessário porque o site disponibiliza os dados através de uma aplicação Javascript, de tal forma que é difícil interagir com a aplicação usando requisições HTTP apenas. Além disso, para cada tipo de crime, as tabelas são disponibilizadas de forma mensal, o que resultaria em uma grande demora para a coleta dos dados manual. Foram adquiridas mais de 500 tabelas individuais.
 
 Com os dados baixados, foi possível juntá-los todos em um único arquivo CSV. Várias colunas com dados que não seriam úteis para nós foram descartadas. Foram descartadas também as linhas com dados incompletos, as linhas correspondentes a BOs complementares e as correspondentes a BOs fora da cidade de São Paulo. Além disso, foi criada uma coluna de ID.
 
@@ -141,3 +141,118 @@ O modelo lógico relacional também evoluiu de forma a acompanhar as mudanças n
 Inicialmente, a divisão em quadrantes foi feita utilizando quadrantes de 10 km de lado. No entanto, foram encontrados problemas com essa primeira abordagem. Primeiro, os quadrantes estavam grandes demais e, por isso, as análises não estavam rendendo resultados muito conclusivos. Além disso, devido à existência de alguns outliers entre os crimes, ou seja, crimes que ocorreram muito distantes da área principal da cidade, os limites de latitude e longitude utilizados para definir a região abrangida pelos dados. O resultado da junção desses dois fatores é que tínhamos 1064 quadrantes, dos quais apenas 31 tinham algum crime. Depois que esses outliers foram removidos e os quadrantes diminuídos para 3 km, passamos a ter 528 quadrantes, dos quais 200 têm pelo menos um crime.
 
 
+## Perguntas de Pesquisa/Análise Combinadas e Respectivas Análises
+
+### Perguntas/Análise com Resposta Implementada
+
+#### Pergunta/Análise 1
+> * Qual a relação entre o número de postes policiais e número de crimes nos quadrantes?
+>   * É possível comparar, dentro de um mesmo quadrante, o número de crimes e o número de postes para verificar qual o efeito dos postos policiais nos crimes, verificando se ocorre um aumento ou diminuição dos crimes de acordo com o número de postos. A partir da tabela, é possível construir um gráfico de dispersão para facilitar a visualização,
+> ~~~sql
+> CREATE VIEW Numero_postos AS
+>
+> SELECT Q.ID, COUNT(*) N_POSTOS
+>    FROM Postos P, Quads Q
+>    WHERE P.QUAD= Q.ID
+>    GROUP BY Q.ID;
+>
+> SELECT NC.ID, NC.N_CRIMES, NP.N_POSTOS
+>    FROM Numero_crimes NC, Numero_postos NP
+>    WHERE NC.ID = NP.ID
+>    ORDER BY NC.N_CRIMES
+> ~~~
+> 
+> ![Relação Postos Crimes](assets/relacao_postos_crimes.png)
+> 
+> É possível observar que as regiões com maior número de crimes possuem maior número de postos, fazendo com que São Paulo possua uma boa distribuição de postos para tentar os crimes
+
+#### Pergunta/Análise 2
+> * Em que período do dia ocorrem mais crimes em um determinado quadrante? Quais quadrantes são mais perigosos de noite?
+>   * Através dos horários que os crimes foram cometidos é possível separar os crimes que ocorrem durante o dia e durante a noite, possibilitando também a comparação entre o número de crimes entre os diferentes períodos do dia.
+>   ~~~sql
+>   CREATE VIEW Numero_crimes_noturnos AS
+>    SELECT Q.ID, COUNT(*) N_CRIMES_NOTURNOS
+>    FROM Crimes C, Quads Q
+>    WHERE C.QUAD = Q.ID AND (C.PERIODO_OCORRENCIA = 'A NOITE' OR C.PERIODO_OCORRENCIA = 'DE MADRUGADA')
+>    GROUP BY Q.ID;
+>   
+>    CREATE VIEW Numero_crimes_diarios AS
+>    SELECT Q.ID, COUNT(*) N_CRIMES_DIARIOS
+>    FROM Crimes C, Quads Q
+>    WHERE C.QUAD = Q.ID AND (C.PERIODO_OCORRENCIA = 'PELA MANHÃƒ' OR C.PERIODO_OCORRENCIA = 'A TARDE')
+>    GROUP BY Q.ID;
+>    
+>    CREATE VIEW Numero_crimes AS
+>    SELECT Q.ID, COUNT(*) N_CRIMES
+>    FROM Crimes C, Quads Q
+>    WHERE Q.ID = C.QUAD
+>    GROUP BY Q.ID;
+>    
+>    SELECT NCN.ID, CAST(NCD.N_CRIMES_DIARIOS AS FLOAT)/NC.N_CRIMES*100 Per_diario, CAST(NCN.N_CRIMES_NOTURNOS AS FLOAT)/NC.N_CRIMES*100 Per_noturno
+>    FROM Numero_crimes_noturnos NCN, Numero_crimes_diarios NCD, Numero_crimes NC
+>    WHERE NCN.ID = NCD.ID AND NCN.ID = NC.ID
+>    ~~~
+>    ![Crimes Diários e Noturnos](assets/crimes-diarios_noturnos.png)
+>    
+> Para a grande maioria dos casos, há mais crimes no período noturno do que no período diário.
+
+#### Pergunta/Análise 3
+> * Como é a distribuição dos postos de policiais dentro de São Paulo comparado com a distribuição de crimes?
+>   * A partir dos quadrantes obtidos, é possível separá-los de acordo com as regiões oficiais 'Norte', 'Sul', 'Leste', 'Oeste' e 'Centro' de São Paulo. Dessa forma, é possível comparar se os postos estão devidamente distribuídos dentro dessas regiões da mesma forma que os crimes estão distribuídos, ou seja, se há uma boa alocação de recursos de segurança em São Paulo.
+>   ~~~sql
+>   CREATE VIEW CRIMES_REG AS
+>   SELECT Q.ZONA, COUNT(*) Contagem
+>	  FROM QUADS Q, CRIMES C
+>	  WHERE Q.ID = C.QUAD
+>	  GROUP BY Q.ZONA
+>	  
+>   CREATE VIEW POSTES_REG AS
+>   SELECT Q.Zona, SUM(NP.N_POSTES) N_POSTES
+>	  FROM QUADS Q, Numero_postes NP
+>	  WHERE Q.ID = NP.ID
+>	  GROUP BY Q.ZONA
+>	  
+>   SELECT PR.Zona, (CAST(PR.N_POSTOS AS FLOAT)/(SELECT CAST(COUNT(*) AS FLOAT) FROM POSTOS))*100 Postos, 
+>	  (CAST(CR.Contagem AS FLOAT)/(SELECT CAST(COUNT(*) AS FLOAT) FROM CRIMES))*100 Crimes
+>	  FROM POSTOS_REG PR, CRIMES_REG CR
+>	  WHERE PR.ZONA = CR.ZONA
+>	~~~
+>	![Distribuição Postos e Crime em Regiões](assets/postos_crimes_regioes.png)
+>	
+>	No geral, crimes e postos estão distribuídos de maneira equivalente.
+
+#### Pergunta/Análise 4
+> * Como os crimes se distribuem nas regiões de São Paulo?
+>   * A partir das regiões criadas com os quadrantes, é possível contar os números de crimes e analisar como é a contribuição das regiões para o númeor total de crimes.
+>   ~~~sql
+>   SELECT Zona, (CAST(Contagem AS FLOAT)/(SELECT CAST(COUNT(*) AS FLOAT) FROM CRIMES))*100 Porcentagem
+>	  FROM CRIMES_REG
+>	  ~~~
+>	  ![Distribuição Crimes em Regiões](assets/crimes_regioes.png)
+>	  
+> As regiões Sul e Leste são as com maiores números de crimes.
+
+#### Pergunta/Análise 5
+> * Quais são os tipos de crimes mais comuns em São Paulo? E por região?
+>   * Com a classificação dos tipos de crimes, é possível contabilizar qual o tipo de crime que mais ocorre na cidade e em suas regiões.
+> ~~~sql
+> CREATE VIEW Tipo_Regiao AS
+> SELECT Q.ZONA, TC.NOME, COUNT(*) Contagem
+>	FROM QUADS Q, CRIMES C, TIPOS_CRIMES TC
+>	WHERE Q.ID = C.QUAD AND TC.NOME = C.TIPO_CRIME
+>	GROUP BY Q.ZONA, TC.NOME
+>	
+>	SELECT ZONA, NOME, Contagem
+>	FROM Tipo_Regiao
+>	WHERE Contagem = (SELECT MAX(CONTAGEM) FROM Tipo_Regiao WHERE ZONA = 'NORTE')
+>	OR	Contagem = (SELECT MAX(CONTAGEM) FROM Tipo_Regiao WHERE ZONA = 'SUL')
+>	OR	Contagem = (SELECT MAX(CONTAGEM) FROM Tipo_Regiao WHERE ZONA = 'LESTE')
+>	OR	Contagem = (SELECT MAX(CONTAGEM) FROM Tipo_Regiao WHERE ZONA = 'OESTE')
+>	OR	Contagem = (SELECT MAX(CONTAGEM) FROM Tipo_Regiao WHERE ZONA = 'CENTRAL');
+>	~~~
+>	![Tipo Crimes Comuns](assets/tipo_crimes_regioes.png)
+>	
+>	Em toda São Paulo, o tipo de crime mais comum é roubo.
+
+#### Outras Perguntas/Análises
+> Assim como a distribuição de postos, é possível realizar as mesmas questões para os postes. Além disso, é possível agrupar o número de postes e postos policiais para verificar como o maior número de equipamentos de segurança em um mesmo quadrante/região afeta os crimes ocorridos neles.
