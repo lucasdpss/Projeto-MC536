@@ -224,7 +224,7 @@ SELECT NC.ID, NC.N_CRIMES, NP.N_POSTOS
 
 ![Relação Postos Crimes](assets/relacao_postos_crimes.png)
 
-É possível observar que as regiões com maior número de crimes possuem maior número de postos, fazendo com que São Paulo possua uma boa distribuição de postos para tentar os crimes
+É possível observar que os quadrantes com maior número de crimes possuem maior número de postos, fazendo com que São Paulo possua uma boa distribuição de postos para tentar os crimes
 
 #### Pergunta/Análise 2
 * Em que período do dia ocorrem mais crimes em um determinado quadrante? Quais quadrantes são mais perigosos de noite?
@@ -316,3 +316,5 @@ Em toda São Paulo, o tipo de crime mais comum é roubo.
 
 #### Outras Perguntas/Análises
 Assim como a distribuição de postos, é possível realizar as mesmas questões para os postes. Além disso, é possível agrupar o número de postes e postos policiais para verificar como o maior número de equipamentos de segurança em um mesmo quadrante/região afeta os crimes ocorridos neles.
+
+Link para notebook com as consultas em SQL: [notebook](notebooks/queries_modelo_relacional.ipynb
